@@ -1,0 +1,1 @@
+Solved manually with LibreOffice Calc :D

@@ -18,10 +18,8 @@ $x = 0;
 $y = 0;
 $deltaX = 10;
 $deltaY = 1;
-$directions = [0 => 'E', 90 => 'S', 180 => 'W', 270 => 'N'];
-$currentWaypointDirection = 0;
 
-//printf("x: %d, y: %d, dX: %d, dY: %d, direction: %s\n", $x, $y, $deltaX, $deltaY, $currentWaypointDirection);
+//printf("x: %d, y: %d, dX: %d, dY: %d\n", $x, $y, $deltaX, $deltaY);
 foreach ($instructions as $instruction) {
     $currentDeltaX = $deltaX;
     $currentDeltaY = $deltaY;
@@ -57,6 +55,6 @@ foreach ($instructions as $instruction) {
             $y += $deltaY*$instruction['value'];
             break;
     }
-    //printf("x: %d, y: %d, dX: %d, dY: %d, direction: %s\n", $x, $y, $deltaX, $deltaY, $currentWaypointDirection);
+    //printf("x: %d, y: %d, dX: %d, dY: %d\n", $x, $y, $deltaX, $deltaY);
 }
 var_dump(abs($x)+abs($y));

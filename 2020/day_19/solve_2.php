@@ -1,6 +1,6 @@
 <?php
 
-// Fail after 1h39, but I do not know why :(
+// Solved in about 2h
 $inRuleSection = true;
 $messages = [];
 $rules = [];
@@ -91,6 +91,7 @@ foreach ($messages as $message) {
         (!isset($prefixIndexes[0]) || !isset($prefixIndexes[1])) // We need at least 2 valid prefixes
         || !isset($suffixIndexes[count($chunks)-1])              // We need at least 1 valid suffix
         || max($prefixIndexes) > min($suffixIndexes)             // No prefix after the first suffix
+        || count($suffixIndexes) >= count($prefixIndexes)
     ) {
         continue;
     }

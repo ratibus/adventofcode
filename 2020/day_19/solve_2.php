@@ -60,6 +60,18 @@ function getValidMessages($rules, $start) {
     return $validMessages;
 }
 
+
+/**
+ * Starting rules are :
+ * 0: 8 11
+ * 8: 42 | 42 8
+ * 11: 42 31 | 42 11 31
+ *
+ * Which is equivalent to have our messages matching the rule: 42{n} 31 {m} with n>1, m>0 and m<n
+ *
+ * Pattern from 42 and 31 have the same length
+ */
+
 $validPrefixes = getValidMessages($rules, 42);
 $validSuffixes = getValidMessages($rules, 31);
 

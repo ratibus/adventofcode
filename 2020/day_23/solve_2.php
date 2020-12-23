@@ -39,9 +39,8 @@ for ($round = 0; $round < 10000000; $round++) {
     }
 
     // we insert the 3 orphan nodes to the right place
-    $oldDestinationNext = $cups[$destinationCup];
+    $cups[$nextNextNext] = $cups[$destinationCup];
     $cups[$destinationCup] = $next; // $next is still "connected" to $nextNext and $nextNext to $nextNextNext
-    $cups[$nextNextNext] = $oldDestinationNext;
 
     // the current cup is the next one
     $currentCup = $cups[$currentCup];

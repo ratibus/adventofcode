@@ -6,17 +6,17 @@
 $input = '389125467'; // test
 $input = '253149867';
 
-$numbers = array_merge(str_split($input), range(10, 1000000));
+$highestCup = 1000000;
+$numbers = array_merge(str_split($input), range(10, $highestCup));
 $nbCups = count($numbers);
 
 // build of circular list
-$cups = [];
+$cups = new SplFixedArray($nbCups+1); // Much faster than standard array (2 sec vs 3.3 sec)
 foreach ($numbers as $numberIndex => $number) {
     $cups[$number] = (int)$numbers[($numberIndex+1)%$nbCups]; // modulo connects the last one to the first one
 }
-$currentCup = $numbers[0];
-$highestCup = max($cups);
 
+$currentCup = $numbers[0];
 for ($round = 0; $round < 10000000; $round++) {
 
     $next = $cups[$currentCup];

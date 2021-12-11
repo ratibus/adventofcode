@@ -33,29 +33,25 @@ for ($i = 0; $i < $nbSteps; $i++) {
     while (count2d($cellsToFlash)) {
         foreach ($cellsToFlash as $y => $cells) {
             foreach ($cells as $x => $value) {
+
+                $nbFlashes++;
+                $flashedCells[$y][$x] = true;
+                $grid[$y][$x] = 0;
+
                 for ($dy = -1; $dy <= 1; $dy++) {
                     for ($dx = -1; $dx <= 1; $dx++) {
-                        if (($dy == 0 && $dx == 0) || !isset($grid[$y+$dy][$x+$dx])) {
+                        if (($dy == 0 && $dx == 0) || !isset($grid[$y+$dy][$x+$dx]) || isset($flashedCells[$y+$dy][$x+$dx])) {
                             continue;
                         }
+
                         $grid[$y+$dy][$x+$dx]++;
 
-                        if ($grid[$y+$dy][$x+$dx] > 9 && !isset($flashedCells[$y+$dy][$x+$dx])) {
+                        if ($grid[$y+$dy][$x+$dx] > 9) {
                             $cellsToFlash[$y+$dy][$x+$dx] = true;
                         }
                     }
                 }
-                $flashedCells[$y][$x] = true;
                 unset($cellsToFlash[$y][$x]);
-            }
-        }
-    }
-
-    for ($y = 0; $y < $gridSize; $y++) {
-        for ($x = 0; $x < $gridSize; $x++) {
-            if ($grid[$y][$x] > 9) {
-                $grid[$y][$x] = 0;
-                $nbFlashes++;
             }
         }
     }

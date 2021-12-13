@@ -4,11 +4,10 @@
 
 $inputFile = __DIR__ . '/input_test.txt';
 $inputFile = __DIR__ . '/input.txt';
+$inputFile = __DIR__ . '/input_big.txt';
 
 $folds = [];
 $grid = [];
-$gridSizeX = 0;
-$gridSizeY = 0;
 foreach (file($inputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $y => $line) {
 
     if (strpos($line, 'fold') === 0) {
@@ -18,13 +17,8 @@ foreach (file($inputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $y =
     } else {
         list($x, $y) = explode(',', $line);
         $grid[$y][$x] = true;
-
-        $gridSizeX = max($x, $gridSizeX);
-        $gridSizeY = max($y, $gridSizeY);
     }
 }
-$gridSizeX++;
-$gridSizeY++;
 
 foreach ($folds as $fold) {
 
@@ -32,58 +26,48 @@ foreach ($folds as $fold) {
 
     if ($fold['axis'] === 'y') {
 
-        for ($y = 0; $y < $gridSizeY; $y++) {
+        foreach ($grid as $y => $row) {
+
             if ($y == $fold['coord']) {
                 continue; // skip line on fold axis
             }
 
-            for ($x = 0; $x < $gridSizeX; $x++) {
-
-                if (!isset($grid[$y][$x])) {
-                    continue;
-                }
-                $newY = $y < $fold['coord'] ? $y : $fold['coord'] - 1 - ($y - $fold['coord'] - 1);
-
-                if ($newY < 0) {
-                    continue;
-                }
-
+            foreach ($row as $x => $true) {
+                $newY = $y < $fold['coord'] ? $y : 2 * $fold['coord'] - $y;
                 $newGrid[$newY][$x] = true;
             }
         }
-        $gridSizeY = $fold['coord'];
 
     } else {
 
-        for ($y = 0; $y < $gridSizeY; $y++) {
-            for ($x = 0; $x < $gridSizeX; $x++) {
+        foreach ($grid as $y => $row) {
+            foreach ($row as $x => $true) {
 
                 if ($x == $fold['coord']) {
                     continue; // skip column on fold axis
                 }
-                if (!isset($grid[$y][$x])) {
-                    continue;
-                }
-                $newX = $x < $fold['coord'] ? $x : $fold['coord'] - 1 - ($x - $fold['coord'] - 1);
-
-                if ($newX < 0) {
-                    continue;
-                }
-
+                $newX = $x < $fold['coord'] ? $x : 2 * $fold['coord'] - $x;
                 $newGrid[$y][$newX] = true;
             }
         }
-        $gridSizeX = $fold['coord'];
     }
     $grid = $newGrid;
 }
 
-displayGrid($grid, $gridSizeX, $gridSizeY);
+displayGrid($grid);
 
-function displayGrid($grid, $gridSizeX, $gridSizeY) {
+function displayGrid($grid) {
+
+    $maxY = max(array_keys($grid));
+    $maxX = 0;
+    foreach ($grid as $row) {
+        foreach ($row as $x => $true) {
+            $maxX = max($maxX, $x);
+        }
+    }
     echo "\n";
-    for ($y = 0; $y < $gridSizeY; $y++) {
-        for ($x = 0; $x < $gridSizeX; $x++) {
+    for ($y = 0; $y < $maxY; $y++) {
+        for ($x = 0; $x < $maxX; $x++) {
             echo isset($grid[$y][$x]) ? '#' : '.';
         }
         echo "\n";

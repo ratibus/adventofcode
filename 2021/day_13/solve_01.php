@@ -80,16 +80,12 @@ foreach ($folds as $fold) {
     break;
 }
 
-var_dump(countDots($grid, $gridSizeX, $gridSizeY));
+var_dump(countDots($grid));
 
-function countDots($grid, $gridSizeX, $gridSizeY) {
+function countDots($grid) {
     $nb = 0;
-    for ($y = 0; $y <= $gridSizeY; $y++) {
-        for ($x = 0; $x <= $gridSizeX; $x++) {
-            if (isset($grid[$y][$x])) {
-                $nb++;
-            }
-        }
+    foreach ($grid as $row) {
+        $nb += count($row);
     }
     return $nb;
 }

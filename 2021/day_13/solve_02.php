@@ -13,8 +13,8 @@ foreach (file($inputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $y =
 
     if (strpos($line, 'fold') === 0) {
         list(,,$fold) = explode(' ', $line);
-        list($foldAxe, $foldCoord) = explode('=', $fold);
-        $folds[] = ['axe' => $foldAxe, 'coord' => $foldCoord];
+        list($foldAxis, $foldCoord) = explode('=', $fold);
+        $folds[] = ['axis' => $foldAxis, 'coord' => $foldCoord];
     } else {
         list($x, $y) = explode(',', $line);
         $grid[$y][$x] = true;
@@ -30,11 +30,11 @@ foreach ($folds as $fold) {
 
     $newGrid = [];
 
-    if ($fold['axe'] === 'y') {
+    if ($fold['axis'] === 'y') {
 
         for ($y = 0; $y < $gridSizeY; $y++) {
             if ($y == $fold['coord']) {
-                continue; // skip line on fold axe
+                continue; // skip line on fold axis
             }
 
             for ($x = 0; $x < $gridSizeX; $x++) {
@@ -59,7 +59,7 @@ foreach ($folds as $fold) {
             for ($x = 0; $x < $gridSizeX; $x++) {
 
                 if ($x == $fold['coord']) {
-                    continue; // skip column on fold axe
+                    continue; // skip column on fold axis
                 }
                 if (!isset($grid[$y][$x])) {
                     continue;

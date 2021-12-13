@@ -66,8 +66,8 @@ function displayGrid($grid) {
         }
     }
     echo "\n";
-    for ($y = 0; $y < $maxY; $y++) {
-        for ($x = 0; $x < $maxX; $x++) {
+    for ($y = 0; $y <= $maxY; $y++) {
+        for ($x = 0; $x <= $maxX; $x++) {
             echo isset($grid[$y][$x]) ? '#' : '.';
         }
         echo "\n";

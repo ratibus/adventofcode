@@ -44,7 +44,7 @@ function displayGrid($grid) {
     $maxY = max(array_keys($grid));
     $maxX = 0;
     foreach ($grid as $row) {
-        foreach ($row as $x => $true) {
+        foreach ($row as $x) {
             $maxX = max($maxX, $x);
         }
     }

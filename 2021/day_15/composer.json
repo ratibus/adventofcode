@@ -1,0 +1,5 @@
+{
+    "require": {
+        "blackscorp/astar": "^1.2"
+    }
+}

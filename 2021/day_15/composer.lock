@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "2ae8d8dd342f88f50fd5588b6db3f4b3",
+    "packages": [
+        {
+            "name": "blackscorp/astar",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BlackScorp/astar.git",
+                "reference": "9b80d6135ac31947d246cf2e33ff45d4681a6a57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BlackScorp/astar/zipball/9b80d6135ac31947d246cf2e33ff45d4681a6a57",
+                "reference": "9b80d6135ac31947d246cf2e33ff45d4681a6a57",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BlackScorp\\Astar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vitalij Mik",
+                    "email": "cccpmik+composer@gmail.com"
+                }
+            ],
+            "description": "AStar path finding implementation in php",
+            "support": {
+                "issues": "https://github.com/BlackScorp/astar/issues",
+                "source": "https://github.com/BlackScorp/astar/tree/v1.2.0"
+            },
+            "time": "2017-10-06T15:21:22+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
+}

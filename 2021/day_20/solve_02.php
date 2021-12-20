@@ -42,7 +42,7 @@ for ($i = 0; $i < 50; $i++) {
     $image = $newImage;
 
     if ($i % 2 === 1) {
-        $image = cutBorder($image, 17);
+        $image = cutBorder($image, 18);
     }
 }
 

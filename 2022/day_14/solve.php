@@ -19,12 +19,12 @@ foreach ($lines as $line) {
             foreach (range(min($points[$i][1], $points[$i-1][1]), max($points[$i][1], $points[$i-1][1])) as $y) {
                 $grid[$y][$points[$i][0]] = '#';
             }
-            $maxY = max($maxY, $y);
+            $maxY = max($maxY, (int)$y);
         } elseif ($points[$i][1] === $points[$i-1][1]) { // Horizontal line
             foreach (range(min($points[$i][0], $points[$i-1][0]), max($points[$i][0], $points[$i-1][0])) as $x) {
                 $grid[$points[$i][1]][$x] = '#';
             }
-            $maxY = max($maxY, $points[$i][1]);
+            $maxY = max($maxY, (int)$points[$i][1]);
         }
     }
 }
@@ -50,7 +50,7 @@ function getNbRestedSand ($grid, $maxY, $hasFloor) {
                 if (isset($grid[$sandY + $dY][$sandX + $dX])) {
                     continue;
                 }
-                if ($hasFloor && $sandY + $dY == $maxY + 2) {
+                if ($hasFloor && $sandY + $dY === $maxY + 2) {
                     continue; // Blocked by the floor
                 }
                 $sandY = $sandY + $dY;
@@ -69,7 +69,7 @@ function getNbRestedSand ($grid, $maxY, $hasFloor) {
                 break;
             }
 
-            if (!$hasFloor && $sandY == $maxY) {
+            if (!$hasFloor && $sandY === $maxY) {
                 break 2;
             }
         }

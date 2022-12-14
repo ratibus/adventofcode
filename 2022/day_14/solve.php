@@ -9,8 +9,7 @@ $lines = file($inputFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
 $grid = [];
 
-$minX = $minY = PHP_INT_MAX;
-$maxX = $maxY = -PHP_INT_MAX;
+$maxY = -PHP_INT_MAX;
 foreach ($lines as $line) {
     $points = explode(" -> ", $line);
     $points = array_map(function ($e) { return explode(',', $e); }, $points);
@@ -20,20 +19,12 @@ foreach ($lines as $line) {
             foreach (range(min($points[$i][1], $points[$i-1][1]), max($points[$i][1], $points[$i-1][1])) as $y) {
                 $grid[$y][$points[$i][0]] = '#';
             }
-            $minX = min($minX, $points[$i][0]);
-            $maxX = max($maxX, $points[$i][0]);
-            $minY = min($minY, min($points[$i][1], $points[$i-1][1]));
-            $maxY = max($maxY, max($points[$i][1], $points[$i-1][1]));
+            $maxY = max($maxY, $y);
         } elseif ($points[$i][1] === $points[$i-1][1]) { // Horizontal line
             foreach (range(min($points[$i][0], $points[$i-1][0]), max($points[$i][0], $points[$i-1][0])) as $x) {
                 $grid[$points[$i][1]][$x] = '#';
             }
-            $minX = min($minX, min($points[$i][0], $points[$i-1][0]));
-            $maxX = max($maxX, max($points[$i][0], $points[$i-1][0]));
-            $minY = min($minY, $points[$i][1]);
             $maxY = max($maxY, $points[$i][1]);
-        } else {
-            die("oups");
         }
     }
 }

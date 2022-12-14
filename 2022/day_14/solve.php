@@ -11,20 +11,14 @@ $grid = [];
 
 $maxY = -PHP_INT_MAX;
 foreach ($lines as $line) {
-    $points = explode(" -> ", $line);
-    $points = array_map(function ($e) { return explode(',', $e); }, $points);
+    $points = array_map(function ($e) { return array_map('intval', explode(',', $e)); }, explode(" -> ", $line));
 
     for ($i = 1; $i < count($points); $i++) {
-        if ($points[$i][0] === $points[$i-1][0]) { // Vertical line
-            foreach (range(min($points[$i][1], $points[$i-1][1]), max($points[$i][1], $points[$i-1][1])) as $y) {
-                $grid[$y][$points[$i][0]] = '#';
-            }
-            $maxY = max($maxY, (int)$y);
-        } elseif ($points[$i][1] === $points[$i-1][1]) { // Horizontal line
+        foreach (range(min($points[$i][1], $points[$i-1][1]), max($points[$i][1], $points[$i-1][1])) as $y) {
             foreach (range(min($points[$i][0], $points[$i-1][0]), max($points[$i][0], $points[$i-1][0])) as $x) {
-                $grid[$points[$i][1]][$x] = '#';
+                $grid[$y][$x] = '#';
             }
-            $maxY = max($maxY, (int)$points[$i][1]);
+            $maxY = max($maxY, $y);
         }
     }
 }
